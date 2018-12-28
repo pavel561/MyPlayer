@@ -16,10 +16,7 @@ namespace MusicPlayer
             //player.Volume = 20;			//Ошибка, т.к. сеттер у ствойства приватный
             player.VolumeChange(-101);
 
-			var song1 = CreateSong();
-			var song2 = CreateSong("Obla Di Obla Da");
-			var song3 = CreateSong("Baskov", 200);
-			player.Add(song1, song2, song3);
+			
 
 			player.Play();
 			player.VolumeUp();
@@ -38,10 +35,14 @@ namespace MusicPlayer
 			int totalDuration = 0;
 			int minDuration;
 			int maxDuration;
+			var song1 = CreateSong();
+			var song2 = CreateSong("Obla Di Obla Da");
+			var song3 = CreateSong("Baskov", 200);
+			player.Add(song1, song2, song3);
 
 			player.Add(GetSongsData(ref totalDuration, out minDuration, out maxDuration));
 			Console.WriteLine($"Total duration: {totalDuration}, min: {minDuration}, max:{maxDuration}");
-            TraceInfo(player);
+            //TraceInfo(player);
 			
 
 			Console.ReadLine();
