@@ -36,7 +36,8 @@ namespace MusicPlayer
             }
         }
 
-        public Song[] Songs { get; private set; }
+		public List<Song> Songs = new List<Song>();
+		//public Song[] Songs { get; private set; }
 
         public Player()
         {
@@ -93,6 +94,7 @@ namespace MusicPlayer
 			else
 			{
 				Volume += step;
+				Console.WriteLine($"Volume change to {Volume}");
 			}
            
         }
@@ -105,9 +107,9 @@ namespace MusicPlayer
 			else
 			{
 				_playing = true;
-				for (int i = 0; i < Songs.Length; i++)
+				foreach (Song song in Songs)
 				{
-					Console.WriteLine($"Player is playing: {Songs[i].Name}, duration is {Songs[i].Duration} sec.");
+					Console.WriteLine($"Player is playing: {song.Name}, duration is {song.Duration} sec.");
 					System.Threading.Thread.Sleep(1000);
 				}
 			}
@@ -137,9 +139,35 @@ namespace MusicPlayer
             Console.WriteLine($"Player is unlocked.");
             _locked = false;
         }
-		public void Add(params Song[] songsArray)
+		public void Add(List<Song> songsArray)
 		{
+			//В перспективе принимать ссылки на файлы ФС
+			//Принимать файлы плейлистов
+			//Сохранять файл плейлиста
 			Songs = songsArray;
+		}
+		public void Add(Song song)
+		{
+			//В перспективе принимать ссылки на файлы ФС
+			//Принимать файлы плейлистов
+			//Сохранять файл плейлиста
+			Songs.Add(song);
+
+		}
+		public void Sort()				//Дописать метод сортировки песен
+		{
+			Songs.Sort();
+		}
+		public void Shuffle()           //Дописать метод перемешивания песен
+		{
+			Random rnd = new Random();
+
+			for (int i = Songs.Count - 1; i >= 0; i--)
+			{
+				var song = Songs[rnd.Next(Songs.Count - 1)];
+				Songs.Remove(song);
+				Songs.Add(song);
+			}
 		}
     }
 }

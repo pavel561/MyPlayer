@@ -42,7 +42,6 @@ namespace MusicPlayer
 			Console.WriteLine($"{artist3.Genre}");
 			//TraceInfo(player);
 
-
 			Console.ReadLine();
         }
         
@@ -122,8 +121,8 @@ namespace MusicPlayer
 			var song3 = CreateSong("Baskov", 200);
 
 			player.Add(song1);
-			player.Add(song1, song2);
-			player.Add(song1, song2, song3);
+			//player.Add(song1, song2);
+			//player.Add(song1, song2, song3);
 			player.Add(GetSongsData(ref totalDuration, out minDuration, out maxDuration));
 			Console.WriteLine($"Плейлист :");
 			foreach (Song song in player.Songs)
@@ -133,12 +132,12 @@ namespace MusicPlayer
 			Console.WriteLine($"Total duration: {totalDuration}, min: {minDuration}, max:{maxDuration}");
 		}
 
-		public static Song[] GetSongsData(ref int totalDuration, out int minDuration, out int maxDuration)
+		public static List<Song> GetSongsData(ref int totalDuration, out int minDuration, out int maxDuration)
 		{
 			minDuration = 1000;
 			maxDuration = 0;
 
-			var songs = new Song[10];
+			var songs = new List<Song>();
 			var random = new Random();
 
 			var artist = new Artist();
@@ -164,7 +163,7 @@ namespace MusicPlayer
 					Artist = artist
 
 				};
-				songs[i] = song;
+				songs.Add(song);
 				totalDuration += song.Duration;
 				if (song.Duration < minDuration) minDuration = song.Duration;
 				maxDuration = Math.Max(maxDuration, song.Duration);
