@@ -12,6 +12,15 @@ namespace MusicPlayer
         public string Name;
         public Artist Artist;
         public Album Album;
+		public bool? LikeState { get; private set; } = null;
+		public void Like()
+		{
+			LikeState = true;
+		}
+		public void Dislike()
+		{
+			LikeState = false;
+		}
 
 		public int CompareTo(object obj)
 		{

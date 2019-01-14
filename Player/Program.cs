@@ -14,8 +14,8 @@ namespace MusicPlayer
 			var player = new Player();
 
 			B5_Player_8_10_ParamsParameters(player);
-			B5_Player_9_10_MethodOverloading();
-			B5_Player_10_10_DefaultAndNamedParamters();
+			//B5_Player_9_10_MethodOverloading();
+			//B5_Player_10_10_DefaultAndNamedParamters();
 
 			//player.Volume = 20;			//Ошибка, т.к. сеттер у ствойства приватный
 			player.VolumeChange(-101);
@@ -129,15 +129,24 @@ namespace MusicPlayer
 			var song2 = CreateSong("Obla Di Obla Da");
 			var song3 = CreateSong("Baskov", 200);
 
-			player.Add(song1);
+			//player.Add(song1);
 			//player.Add(song1, song2);
 			//player.Add(song1, song2, song3);
 			player.Add(GetSongsData(ref totalDuration, out minDuration, out maxDuration));
+
+			//BL8_Player_2_3_LikeDislike
+			player.Songs[0].Like();
+			player.Songs[5].Dislike();
+
 			Console.WriteLine($"Плейлист :");
 			foreach (Song song in player.Songs)
 			{
+				if(song.LikeState == null){	Console.BackgroundColor = ConsoleColor.Black;}
+				if(song.LikeState == true){	Console.BackgroundColor = ConsoleColor.Green;}
+				if(song.LikeState == false){ Console.BackgroundColor = ConsoleColor.Red;}
 				Console.WriteLine($"Испольнитель - {song.Artist.Name}; Альбом - {song.Album.Name}; Композиция - {song.Name}; Продолжительность - {song.Duration} ");
 			}
+			Console.BackgroundColor = ConsoleColor.Black;
 			Console.WriteLine($"Total duration: {totalDuration}, min: {minDuration}, max:{maxDuration}");
 		}
 
@@ -150,7 +159,7 @@ namespace MusicPlayer
 			var random = new Random();
 
 			var artist = new Artist();
-			artist.Genre = "Rock";
+			artist.Genre = Artist.Genres.Rock;
 			artist.Name = "AC/DC";
 			Console.WriteLine($"{artist.Name}");
 			Console.WriteLine($"{artist.Genre}");
