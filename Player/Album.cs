@@ -24,5 +24,9 @@ namespace MusicPlayer
 			this.Name = name;
 			this.Year = year;
 		}
+		public override string ToString()
+		{
+			return ($"{Name}");
+		}
 	}
 }

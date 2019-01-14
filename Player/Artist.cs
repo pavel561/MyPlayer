@@ -26,5 +26,9 @@ namespace MusicPlayer
             this.Name = name;
             this.Genre = genre;
         }
-    }
+		public override string ToString()
+		{
+			return ($"{Name}");
+		}
+	}
 }

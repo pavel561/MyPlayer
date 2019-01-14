@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MusicPlayer.Extentions;
 
 namespace MusicPlayer
 {
@@ -33,15 +34,23 @@ namespace MusicPlayer
 			player.Stop();
 
 
-			var artist2 = new Artist("Pink Floyd");
-			Console.WriteLine($"{artist2.Name}");
-			Console.WriteLine($"{artist2.Genre}");
+			//var artist2 = new Artist("Pink Floyd");
+			//Console.WriteLine($"{artist2.Name}");
+			//Console.WriteLine($"{artist2.Genre}");
 
-			var artist3 = new Artist("Iowa", "Pop");
-			Console.WriteLine($"{artist3.Name}");
-			Console.WriteLine($"{artist3.Genre}");
+			//var artist3 = new Artist("Iowa", "Pop");
+			//Console.WriteLine($"{artist3.Name}");
+			//Console.WriteLine($"{artist3.Genre}");
 			//TraceInfo(player);
 
+
+
+			//-L9-HW-Player-2/3. Substring
+			foreach (Song song in player.Songs)
+			{
+				Console.WriteLine(song.Name.ShortName());
+			}
+			
 			Console.ReadLine();
         }
         

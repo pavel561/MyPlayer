@@ -9,7 +9,7 @@ namespace MusicPlayer.Extentions
 {
 	static class SongExtentions
 	{
-		const int MAX_LENGTH = 5;
+		const int MAX_LENGTH = 10;
 		static public String ShortName(this String name)
 		{
 			if (name.Length > MAX_LENGTH)
