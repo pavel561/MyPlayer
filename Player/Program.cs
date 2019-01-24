@@ -56,13 +56,13 @@ namespace MusicPlayer
 			player.Add(new Song("Маршрутка", "IOWA", "Pop", 150));
 			player.Add(new Song("My Way", "Frank Sinatra", "Jazz", 300));
 			player.Add(new Song("Makes Me Wonder", "Maroon 5", "Rock", 200));
-			Console.WriteLine();
+			Console.WriteLine("");
 			//Выводим список песен
 			foreach (Song song in player.Songs)
 			{
 				Console.WriteLine(song.Name);
 			}
-			Console.WriteLine();
+			Console.WriteLine("");
 			//Вызываем метор фильтрации песен по жанру
 			List<Song> filteredSongs = FilterByGenre(player.Songs, "Rock");
 			//Выводим список песен после фильтраци
