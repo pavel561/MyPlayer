@@ -51,7 +51,26 @@ namespace MusicPlayer
 			{
 				Console.WriteLine(song.Name.ShortName());
 			}
-			
+
+			//Добавляем песни с другим жанром
+			player.Add(new Song("Маршрутка", "IOWA", "Pop", 150));
+			player.Add(new Song("My Way", "Frank Sinatra", "Jazz", 300));
+			player.Add(new Song("Makes Me Wonder", "Maroon 5", "Rock", 200));
+			Console.WriteLine();
+			//Выводим список песен
+			foreach (Song song in player.Songs)
+			{
+				Console.WriteLine(song.Name);
+			}
+			Console.WriteLine();
+			//Вызываем метор фильтрации песен по жанру
+			List<Song> filteredSongs = FilterByGenre(player.Songs, "Rock");
+			//Выводим список песен после фильтраци
+			foreach (Song song in filteredSongs)
+			{
+				Console.WriteLine(song.Name);
+			}
+
 			Console.ReadLine();
         }
         
@@ -189,9 +208,24 @@ namespace MusicPlayer
 			}
 			return songs;
 		}
-		public List<Song> FilterByGenre(List<Song> songList, string genre)
+
+		// Не знаю что делать переданным значением genre....
+		// Вернуть из метода список с песнями только переданного жанра?
+		public static List<Song> FilterByGenre(List<Song> songList, string genre)
 		{
-			songList.Sort();
+			//Может вот так ?
+			for(int i = 0; i < songList.Count; )
+			{
+				if (songList[i].Artist.Genre != (Artist.Genres)Enum.Parse(typeof (Artist.Genres), genre))
+				{
+					songList.RemoveAt(i);
+				}
+				else
+				{
+					i++;
+				}
+			}			
+			//songList.Sort();
 			return songList;
 		}
 

@@ -21,7 +21,17 @@ namespace MusicPlayer
 		{
 			LikeState = false;
 		}
+		public Song()
+		{
 
+		}
+		public Song(string name, string artistName, string artistGenre, int duration)
+		{
+			Artist = new Artist(artistName, artistGenre);
+			Name = name;
+			Duration = duration;
+
+		}
 		public int CompareTo(object obj)
 		{
 			//if (this.Name == null)

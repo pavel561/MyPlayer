@@ -10,7 +10,7 @@ namespace MusicPlayer
     {
         public Genres Genre;
         public string Name;
-		public enum Genres:int {Unknown = 0, Rock, Punk, Pop, Juzz, HipHop, Folk, Electro, Country, Latin, Blues, Other};
+		public enum Genres:int {Unknown = 0, Rock, Punk, Pop, Jazz, HipHop, Folk, Electro, Country, Latin, Blues, Other};
 
         public Artist()
         {
@@ -34,7 +34,14 @@ namespace MusicPlayer
 		}
 		public int CompareTo(object obj)
 		{
-			return this.Genre?.CompareTo((obj as Artist)?.Genre) ?? 0;
+			Artist artist = obj as Artist;
+			if (this.Genre > artist.Genre)
+				return 1;
+			if (this.Genre < artist.Genre)
+				return -1;
+			else
+				return 0;
+			//return this.Genre?.CompareTo((obj as Artist)?.Genre) ?? 0;
 		}
 	}
 }
