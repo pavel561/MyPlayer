@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MusicPlayer.Extentions;
 
+
 namespace MusicPlayer
 {
     class Program
@@ -78,7 +79,7 @@ namespace MusicPlayer
 			return new Song() { Name = name, Duration = duration};
 		}
 		//=================================================================
-		public static Artist AddArtist(string Name = "Unknown Artist", string Genre = "Unknown genre" )
+		public static Artist AddArtist(string Name = "Unknown Artist", string Genre = "Unknown" )
 		{
 			return new Artist(Name, Genre);
 		}
@@ -188,5 +189,12 @@ namespace MusicPlayer
 			}
 			return songs;
 		}
+		public List<Song> FilterByGenre(List<Song> songList, string genre)
+		{
+			songList.Sort();
+			return songList;
+		}
+
+		
 	}
 }

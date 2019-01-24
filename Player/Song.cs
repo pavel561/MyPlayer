@@ -35,7 +35,15 @@ namespace MusicPlayer
 
 			//return result == null ? 0 : result.Value;
 
-			return this.Name?.CompareTo((obj as Song)?.Name) ?? 0;
+			Song song = obj as Song;
+			if (this.Artist.Genre > song.Artist.Genre)
+				return 1;
+			if (this.Artist.Genre < song.Artist.Genre)
+				return -1;
+			else
+				return 0;
+
+			//return this.Name?.CompareTo((obj as Song)?.Name) ?? 0;
 		}
 		public override string ToString()
 		{
