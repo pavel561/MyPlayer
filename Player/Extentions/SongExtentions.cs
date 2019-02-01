@@ -9,7 +9,18 @@ namespace MusicPlayer.Extentions
 {
 	static class SongExtentions
 	{
-		const int MAX_LENGTH = 10;
+		const int MAX_LENGTH = 40;
+		static public String ShortName(this String name, int length)
+		{
+			if (name.Length > length)
+			{
+				return name.Substring(0, length).Insert(length, "...");
+			}
+			else
+			{
+				return name;
+			}
+		}
 		static public String ShortName(this String name)
 		{
 			if (name.Length > MAX_LENGTH)
@@ -31,6 +42,10 @@ namespace MusicPlayer.Extentions
 				songs.Add(song);
 			}
 			return songs;
+		}
+		static public void Sort(this List<Song> songs)
+		{
+			songs.Sort();
 		}
 	}
 }

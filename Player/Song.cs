@@ -32,6 +32,10 @@ namespace MusicPlayer
 			Duration = duration;
 
 		}
+		//public void Deconstruct(this Song song, out string name, out string minuts,)
+		//{
+
+		//}
 		public int CompareTo(object obj)
 		{
 			//if (this.Name == null)
@@ -57,7 +61,7 @@ namespace MusicPlayer
 		}
 		public override string ToString()
 		{
-			return ($"{Name} - {Artist}, Alb. - {Album}, Dur. - {Duration}");
+			return ($"{Name} - {Artist} - {Album} - {Duration}");
 		}
 	}
 }
