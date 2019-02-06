@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer
 {
-    class Artist: IComparable
+    public class Artist: IComparable
     {
         public Genres Genre;
         public string Name;

@@ -7,20 +7,20 @@ using MusicPlayer.Extentions;
 
 namespace MusicPlayer
 {
-	public abstract class Skin
+	public interface ISkin
 	{
-		public abstract void Clear();
+		void Clear();
 		//public abstract void Render();
-		public abstract void Render(string text);
+		void Render(string text);
 		//public abstract void Render(bool locked, bool shaffle, bool repeat, int volume, bool playing, int position, List<string> playlist);
 	}
-	public class ClassicSkin:Skin
+	public class ClassicSkin:ISkin
 	{
-		public override void Clear()
+		public void Clear()
 		{
 			Console.Clear();
 		}
-		public override void Render(string text)
+		public void Render(string text)
 		{
 			Console.WriteLine(text);
 		}
@@ -29,48 +29,48 @@ namespace MusicPlayer
 			Console.Clear();
 		}
 	}
-	public class ColorSkin : Skin
+	public class ColorSkin : ISkin
 	{
 		public ColorSkin(ConsoleColor color)
 		{
 			Console.ForegroundColor = color;
 		}
-		public override void Render(string text)
+		public void Render(string text)
 		{
 			Console.WriteLine(text);
 		}
-		public void Render(ConsoleColor color,string text)
-		{
-			ConsoleColor prewColor = Console.ForegroundColor;
-			Console.ForegroundColor = color;
-			Console.WriteLine(text);
-			Console.ForegroundColor = prewColor;
-		}
-		public override void Clear()
-		{
-			Console.Clear();
-		}
-		public void NewScreen()
+		//public void Render(ConsoleColor color,string text)
+		//{
+		//	ConsoleColor prewColor = Console.ForegroundColor;
+		//	Console.ForegroundColor = color;
+		//	Console.WriteLine(text);
+		//	Console.ForegroundColor = prewColor;
+		//}
+		public void Clear()
 		{
 			Console.Clear();
 		}
+		//public void NewScreen()
+		//{
+		//	Console.Clear();
+		//}
 	}
-	public class ColorSkinRnd : Skin
+	public class ColorSkinRnd : ISkin
 	{
-		public override void Clear()
+		public void Clear()
 		{
 			Console.Clear();
 		}
-		public override void Render(string text)
+		public void Render(string text)
 		{
 			Console.WriteLine(text);
 		}
-		public void NewScreen()
-		{
-			Console.Clear();
-		}
+		//public void NewScreen()
+		//{
+		//	Console.Clear();
+		//}
 	}
-	class AnimatedColorSkin : Skin
+	class AnimatedColorSkin : ISkin
 	{
 		public const int SkinHeight = 44;
 		public int StatusPosition { get; set; }
@@ -122,11 +122,11 @@ namespace MusicPlayer
 			}
 			
 		}
-		public override void Clear()
+		public void Clear()
 		{
 			Console.Clear();
 		}
-		public override void Render(string text)
+		public void Render(string text)
 		{
 			//Console.WriteLine(text);
 			RenderMessageLine(text);
@@ -188,6 +188,14 @@ namespace MusicPlayer
 			WriteFormatString(songName);
 			//Console.WriteLine("".PadRight(SkinHeight, '-'));
 		}
+		public void RenderSongNameLine(List<Song> songs, int position)
+		{
+			Console.CursorLeft = 0;
+			Console.CursorTop = NamePosition;
+			WriteSeparatorString('-');
+			WriteFormatString(songs[position].ToString());
+			//Console.WriteLine("".PadRight(SkinHeight, '-'));
+		}
 		public void RenderMessageLine(string message)
 		{
 
@@ -205,7 +213,26 @@ namespace MusicPlayer
 			WriteFormatString(DateTime.Now.ToShortTimeString());
 			//WriteSeparatorString('-');
 		}
+		public void RenderPlayListLine(List<Song> listSongs, int currentPosition )
+		{
 
+			Console.CursorLeft = 0;
+			Console.CursorTop = PlaylistPosition;
+			WriteSeparatorString('-');
+			for (int i = 0; i < listSongs.Count; i++)
+			{
+				if (currentPosition == i)
+				{
+					WriteFormatString(" >> " + listSongs[i]);
+				}
+				else
+				{
+				WriteFormatString("    " + listSongs[i].Name);
+				}
+
+			}
+			WriteSeparatorString('-');
+		}
 		public void RenderPlayListLine(List<string> listSongs, int currentPosition)
 		{
 

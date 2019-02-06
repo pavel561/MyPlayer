@@ -15,19 +15,26 @@ namespace MusicPlayer
         static void Main(string[] args)
         {
 			var skin = new AnimatedColorSkin();
-			var player = new Player(skin);
-			player.Load("C:\\YandexDisk\\PROJECTS\\CONSOLE\\Player\\WAV");		//player.Load("D:\\Playlist");
+			var player = new Player();
+			player.SongListChangedEvent += skin.RenderPlayListLine;
+			player.SongStartedEvent += skin.RenderPlayListLine;
+			player.SongStartedEvent += skin.RenderSongNameLine;
+			player.Load("E:\\YandexDisk\\PROJECTS\\CONSOLE\\WAV");      //player.Load("D:\\Playlist");
 
 
-			List<string> songList = new List<string>();
-			foreach (Song song in player.Songs)
-			{
-				songList.Add(song.ToString());
-			}
+			player.PlaylistSrlz();
+			player.Clear();
+			player.PlaylistDeSrlz();
+
+			//List<string> songList = new List<string>();
+			//foreach (Song song in player.Songs)
+			//{
+			//	songList.Add(song.ToString());
+			//}
 
 			//player.Volume = 20;			//Ошибка, т.к. сеттер у ствойства приватный
-			player.VolumeChange(-101);
-			System.Threading.Thread.Sleep(1000);
+			//player.VolumeChange(-101);
+			//System.Threading.Thread.Sleep(1000);
 			player.Play();
 			System.Threading.Thread.Sleep(1000);
 			player.VolumeUp();

@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer
 {
-    class Song:IComparable
+	[Serializable]
+	public class Song:IComparable
     {
         public int Duration;
         public string Name;
         public Artist Artist;
         public Album Album;
-		public bool? LikeState { get; private set; } = null;
+		public string Path;
+
+		[NonSerialized]
+		public bool? LikeState = null;
 		public void Like()
 		{
 			LikeState = true;
@@ -24,6 +28,13 @@ namespace MusicPlayer
 		public Song()
 		{
 
+		}
+		public Song(string name, string path)
+		{
+			this.Path = path;
+			this.Name = name;
+			//this.Artist = new Artist(null,null);
+			//this.Album = Album.
 		}
 		public Song(string name, string artistName, string artistGenre, int duration)
 		{
