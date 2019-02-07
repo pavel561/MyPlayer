@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MusicPlayer.Extentions;
+using Player.Music.Extentions;
 using System.IO;
+using Player.Music;
+using Player.Skin;
 //using MusicPlayer.Skin;
 
 
-namespace MusicPlayer
+namespace Player
 {
     class Program
     {
         static void Main(string[] args)
         {
 			var skin = new AnimatedColorSkin();
-			var player = new Player();
-			player.SongListChangedEvent += skin.RenderPlayListLine;
-			player.SongStartedEvent += skin.RenderPlayListLine;
-			player.SongStartedEvent += skin.RenderSongNameLine;
+			var player = new MusicPlayer() ;
+			player.ItemListChangedEvent += skin.RenderPlayListLine;
+			player.ItemStartedEvent += skin.RenderPlayListLine;
+			player.ItemStartedEvent += skin.RenderSongNameLine;
 			player.Load("E:\\YandexDisk\\PROJECTS\\CONSOLE\\WAV");      //player.Load("D:\\Playlist");
 
 

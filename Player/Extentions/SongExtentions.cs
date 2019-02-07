@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace MusicPlayer.Extentions
+namespace Player.Music.Extentions
 {
 	static class SongExtentions
 	{

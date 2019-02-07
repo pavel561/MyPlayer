@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MusicPlayer.Extentions;
+using Player.Music.Extentions;
+using Player.Music;
+using Player.Generic;
 
-namespace MusicPlayer
+
+namespace Player.Skin
 {
 	public interface ISkin
 	{
@@ -99,7 +102,7 @@ namespace MusicPlayer
 			System.Threading.Thread.Sleep(1000);
 			RenderStatusLine(true, true, true, 50);
 			System.Threading.Thread.Sleep(1000);
-			RenderSongNameLine("The Beatles - Here comes the sun - Abbey Road (1969)".ShortName());
+			//RenderSongNameLine("The Beatles - Here comes the sun - Abbey Road (1969)".ShortName());
 			//RenderPlayListLine(songList, 0);
 			System.Threading.Thread.Sleep(1000);
 			RenderSongNameLine("The Beatles - The end - Abbey Road (1969)".ShortName());
@@ -188,13 +191,21 @@ namespace MusicPlayer
 			WriteFormatString(songName);
 			//Console.WriteLine("".PadRight(SkinHeight, '-'));
 		}
+		public void RenderSongNameLine(string songName, int position)
+		{
+			Console.CursorLeft = 0;
+			Console.CursorTop = NamePosition;
+			WriteSeparatorString('-');
+			WriteFormatString(songName);
+			//Console.WriteLine("".PadRight(SkinHeight, '-'));
+		}
 		public void RenderSongNameLine(List<Song> songs, int position)
 		{
 			Console.CursorLeft = 0;
 			Console.CursorTop = NamePosition;
 			WriteSeparatorString('-');
 			WriteFormatString(songs[position].ToString());
-			//Console.WriteLine("".PadRight(SkinHeight, '-'));
+			Console.WriteLine("".PadRight(SkinHeight, '-'));
 		}
 		public void RenderMessageLine(string message)
 		{
@@ -213,7 +224,26 @@ namespace MusicPlayer
 			WriteFormatString(DateTime.Now.ToShortTimeString());
 			//WriteSeparatorString('-');
 		}
-		public void RenderPlayListLine(List<Song> listSongs, int currentPosition )
+		public void RenderPlayListLine(List<Song> listSongs, int currentPosition)
+		{
+			Console.CursorLeft = 0;
+			Console.CursorTop = PlaylistPosition;
+			WriteSeparatorString('-');
+			for (int i = 0; i < listSongs.Count; i++)
+			{
+				if (currentPosition == i)
+				{
+					WriteFormatString(" >> " + listSongs[i]);
+				}
+				else
+				{
+					WriteFormatString("    " + listSongs[i].Name);
+				}
+
+			}
+			WriteSeparatorString('-');
+		}
+		public void RenderPlayListLine(List<PlayingItem> listSongs, int currentPosition)
 		{
 
 			Console.CursorLeft = 0;
@@ -227,7 +257,7 @@ namespace MusicPlayer
 				}
 				else
 				{
-				WriteFormatString("    " + listSongs[i].Name);
+					WriteFormatString("    " + listSongs[i].Name);
 				}
 
 			}
