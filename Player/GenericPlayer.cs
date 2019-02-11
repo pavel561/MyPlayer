@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Player.Generic
 {
-	public abstract class GenericPlayer<T> //where T: PlayingItem
+	public abstract class GenericPlayer<T> : IDisposable//where T: PlayingItem
 	{
+
 		public delegate void ItemStarted(List<T> itemList, int position);
 		public event ItemStarted ItemStartedEvent;
 
@@ -28,6 +29,7 @@ namespace Player.Generic
 		const int MAX_VOLUME = 100;
 		const int MIN_VOLUME = 0;
 
+		protected bool _disposed;
 		private int _volume;
 		private bool _locked;
 		protected bool _playing;
@@ -37,18 +39,18 @@ namespace Player.Generic
 
 		public List<T> PlayingItemsList = new List<T>();
 
-		public bool RepeatChange()
+		public virtual bool RepeatChange()
 		{
 			Repeat = !Repeat;
 			return Repeat;
 		}
-		public bool ShaffleChange()
+		public virtual bool ShaffleChange()
 		{
 			Shaffle = !Shaffle;
 			return Shaffle;
 		}
 
-		public int Volume
+		public virtual int Volume
 		{
 			get
 			{
@@ -78,15 +80,15 @@ namespace Player.Generic
 			Repeat = false;
 			Shaffle = false;
 		}
-		public void Next()
+		public virtual void Next()
 		{
 
 		}
-		public void Preview()
+		public virtual void Preview()
 		{
 
 		}
-		public void VolumeUp()
+		public virtual void VolumeUp()
 		{
 			if (_locked)
 			{
@@ -109,7 +111,7 @@ namespace Player.Generic
 				}
 			}
 		}
-		public void VolumeDown()
+		public virtual void VolumeDown()
 		{
 			if (_locked)
 			{
@@ -131,7 +133,7 @@ namespace Player.Generic
 				}
 			}
 		}
-		public void VolumeChange(int step)
+		public virtual void VolumeChange(int step)
 		{
 			if (_locked)
 			{
@@ -150,6 +152,7 @@ namespace Player.Generic
 		public abstract bool Play();
 
 		public abstract bool Stop();
+		public abstract void Dispose();
 		
 		public void Lock()
 		{

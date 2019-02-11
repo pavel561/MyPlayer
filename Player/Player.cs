@@ -23,12 +23,22 @@ namespace Player.Music
 		{
 			Stop();
 			soundPlayer.Dispose();
+			this.Dispose();
 			soundPlayer = null;
 			PlayingItemsList = null;
 
 		}
+		public override void Dispose()
+		{
+			if(!this._disposed)
+			{
+				_disposed = true;
+				GC.SuppressFinalize(this);
+			}
+			
+		}
 
-        public override bool Play()
+		public override bool Play()
         {
 			if (Locked)
 			{
